@@ -2,12 +2,15 @@ plugins {
     id 'java'
     id 'groovy'
     id 'org.springframework.boot' version '2.3.5.RELEASE'
+    id "org.flywaydb.flyway" version "7.3.0"
 }
 
 apply plugin: 'java'
 apply plugin: 'java-library'
 apply plugin: 'groovy'
-apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.flywaydb.flyway'
+apply from: 'flyway.gradle'
 
 group 'org.ingue.jpa'
 version '1.0-SNAPSHOT'
@@ -18,14 +21,15 @@ repositories {
 
 ext {
     //  Root =====================================
-    springBootVersion = '2.3.5.RELEASE'
-    guavaVersion = '30.0-jre'
-    lang3Version = '3.11'
-    lombokVersion = '1.18.16'
+    guavaVersion = "30.0-jre"
+    lang3Version = "3.11"
+    lombokVersion = "1.18.16"
+
+    // Domain ====================================
 
     // Test	======================================
-    spockVersion = '2.0-M4-groovy-3.0'
-    randomBeanVersion = '3.9.0'
+    spockVersion = "2.0-M4-groovy-3.0"
+    randomBeanVersion = "3.9.0"
 }
 
 dependencies {
@@ -35,7 +39,9 @@ dependencies {
     )
 
     implementation (
-            "org.springframework.boot:spring-boot-starter:${springBootVersion}"
+            "org.springframework.boot:spring-boot-starter-web",
+            "org.springframework.data:spring-data-jpa",
+            "mysql:mysql-connector-java"
     )
 
     compileOnly (
@@ -47,7 +53,8 @@ dependencies {
     )
 
     testCompile(
-            "org.springframework.boot:spring-boot-starter-test:${springBootVersion}",
+            "org.springframework.boot:spring-boot-starter-test",
+            "com.h2database:h2",
             "org.spockframework:spock-spring:${spockVersion}",
             "io.github.benas:random-beans-randomizers:${randomBeanVersion}"
     )

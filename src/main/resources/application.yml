@@ -1,0 +1,15 @@
+spring:
+  profiles: local
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/study?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: eldrb0116
+  flyway:
+    enabled: false
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    open-in-view: false

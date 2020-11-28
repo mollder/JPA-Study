@@ -1,0 +1,15 @@
+CREATE TABLE `study`.`member` (
+  `memberId`              BIGINT        NOT NULL AUTO_INCREMENT COMMENT '회원 아이디',
+  `memberPassword`        VARCHAR(200)  NOT NULL                COMMENT '회원 비밀번호',
+  `memberName`            VARCHAR(50)   NOT NULL                COMMENT '회원 이름',
+  `memberEmail`           VARCHAR(150)  NOT NULL                COMMENT '회원 이메일',
+  `memberStateMessage`    INT           NOT NULL                COMMENT '회원 상태 메시지',
+  `memberProfileUrl`      VARCHAR(100)  NOT NULL                COMMENT '회원 프로필 url',
+  `memberBirthDate`       VARCHAR(200)  NOT NULL                COMMENT '회원 생년월일',
+  `memberPhoneNumber`     VARCHAR(50)   NOT NULL                COMMENT '회원 핸드폰번호',
+  `memberKakaoId`         VARCHAR(50)   NOT NULL                COMMENT '회원 카카오 아이디',
+  `withdrawAt`            DATETIME(6)   NOT NULL                COMMENT '회원 탈퇴날짜',
+  `createdAt`             DATETIME(6)   NOT NULL                COMMENT '회원 등록 일시',
+  `modifiedAt`            DATETIME(6)   NOT NULL                COMMENT '회원 수정 일시',
+  PRIMARY KEY (`memberId`),
+  UNIQUE INDEX `memberKakaoId_UNIQUE` (`memberKakaoId` ASC));
