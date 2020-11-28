@@ -3,10 +3,7 @@ package org.ingue.jpa.domain;
 import lombok.*;
 import org.ingue.jpa.domain.support.CreatedAndModifiedEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -16,6 +13,7 @@ import javax.persistence.ManyToOne;
 public class Relationship extends CreatedAndModifiedEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long relationshipId;
     private String friendName;
     private String friendStatus;

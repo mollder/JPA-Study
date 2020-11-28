@@ -1,14 +1,9 @@
 package org.ingue.jpa.domain;
 
-import com.mysql.cj.jdbc.Driver;
 import lombok.*;
-import org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl;
 import org.ingue.jpa.domain.support.CreatedAndModifiedEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,6 +14,7 @@ import java.time.LocalDateTime;
 public class Chat extends CreatedAndModifiedEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long chatId;
     private String chatMessage;
     private String chatStatus;

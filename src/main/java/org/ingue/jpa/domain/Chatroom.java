@@ -3,10 +3,7 @@ package org.ingue.jpa.domain;
 import lombok.*;
 import org.ingue.jpa.domain.support.CreatedAndModifiedEntity;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +16,7 @@ import java.util.List;
 public class Chatroom extends CreatedAndModifiedEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long chatroomId;
     private boolean isDelete;
     private LocalDateTime withdrawAt;

@@ -1,12 +1,10 @@
 package org.ingue.jpa.domain;
 
 import lombok.*;
+import org.hibernate.annotations.NaturalId;
 import org.ingue.jpa.domain.support.CreatedAndModifiedEntity;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -20,6 +18,7 @@ import java.util.List;
 public class Member extends CreatedAndModifiedEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberId;
     private String memberPassword;
     private String memberName;
@@ -28,6 +27,8 @@ public class Member extends CreatedAndModifiedEntity {
     private String memberProfileUrl;
     private LocalDate memberBirthDate;
     private String memberPhoneNumber;
+
+    @NaturalId
     private String memberKakaoId;
     private LocalDateTime withdrawAt;
 
