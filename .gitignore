@@ -1,0 +1,55 @@
+HELP.md
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+*.prefs
+target/
+tmp
+project/
+.metadata
+classes/
+atlassian-ide-plugin.xml
+.sonar/
+sonar-project.*
+*~
+rebel.xml
+buildSrc/
+db-migration/
+contiperf-report/
+bin/
+*/src/generated/
+*/src/main/generated/**
+.DS_Store
+node_modules/
+npm-debug.log
+*.map
+**/derby.log
