@@ -1,6 +1,6 @@
 CREATE TABLE `study`.`member_chatroom_mapping` (
   `memberChatroomId`      BIGINT        NOT NULL AUTO_INCREMENT COMMENT '회원 대화방 매핑 아이디',
-  `chatRoomId`            BIGINT        NOT NULL                COMMENT '대화방 아이디',
+  `chatroomId`            BIGINT        NOT NULL                COMMENT '대화방 아이디',
   `memberId`              BIGINT        NOT NULL                COMMENT '회원 아이디',
   `chatroomName`          VARCHAR(60)   NOT NULL                COMMENT '대화방 이름',
   `joinAt`                DATETIME(6)   NOT NULL                COMMENT '대화방 참여 시간',
