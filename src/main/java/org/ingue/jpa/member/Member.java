@@ -1,7 +1,7 @@
-package org.ingue.jpa.domain;
+package org.ingue.jpa.member;
 
 import lombok.*;
-import org.hibernate.annotations.NaturalId;
+import org.ingue.jpa.domain.MemberChatroomMapping;
 import org.ingue.jpa.domain.support.CreatedAndModifiedEntity;
 
 import javax.persistence.*;
@@ -27,8 +27,6 @@ public class Member extends CreatedAndModifiedEntity {
     private String memberProfileUrl;
     private LocalDate memberBirthDate;
     private String memberPhoneNumber;
-
-    @NaturalId
     private String memberKakaoId;
     private LocalDateTime withdrawAt;
 

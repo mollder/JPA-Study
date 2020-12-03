@@ -2,6 +2,7 @@ package org.ingue.jpa.domain;
 
 import lombok.*;
 import org.ingue.jpa.domain.support.CreatedAndModifiedEntity;
+import org.ingue.jpa.member.Member;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

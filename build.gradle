@@ -24,6 +24,7 @@ ext {
     guavaVersion = "30.0-jre"
     lang3Version = "3.11"
     lombokVersion = "1.18.16"
+    springdocVersion = "1.5.0"
 
     // Domain ====================================
 
@@ -41,7 +42,9 @@ dependencies {
     implementation (
             "org.springframework.boot:spring-boot-starter-web",
             "org.springframework.boot:spring-boot-starter-data-jpa",
-            "mysql:mysql-connector-java"
+            "org.springframework.boot:spring-boot-starter-validation",
+            "mysql:mysql-connector-java",
+            "org.springdoc:springdoc-openapi-ui:${springdocVersion}"
     )
 
     compileOnly (
