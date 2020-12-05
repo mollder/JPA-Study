@@ -1,4 +1,4 @@
-package org.ingue.jpa.member;
+package org.ingue.jpa.domain.member;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package org.ingue.jpa.member;
+package org.ingue.jpa.domain.member;
 
 import lombok.*;
 import org.ingue.jpa.domain.MemberChatroomMapping;
@@ -13,6 +13,7 @@ import java.util.List;
 @Entity
 @Getter
 @Builder
+@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Member extends CreatedAndModifiedEntity {
@@ -35,5 +36,6 @@ public class Member extends CreatedAndModifiedEntity {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
+    @Builder.Default
     private List<MemberChatroomMapping> memberChatroomMappings = new ArrayList<>();
 }
