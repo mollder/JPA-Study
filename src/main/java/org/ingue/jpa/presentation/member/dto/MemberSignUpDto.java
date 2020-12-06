@@ -21,6 +21,7 @@ public class MemberSignUpDto {
     private String memberName;
 
     @Email
+    //TODO : @NotNull 및 @NotEmpty를 더해줘야 함 ( 공부 )
     private String memberEmail;
 
     @NotNull
@@ -32,7 +33,7 @@ public class MemberSignUpDto {
     @NotEmpty
     private String memberKakaoId;
 
-    public Member ToMember() {
+    public Member toMember() {
         return Member.builder()
                 .memberPassword(memberPassword)
                 .memberName(memberName)
