@@ -13,7 +13,7 @@ public class MemberModifier {
     public Member signUp(Member member) {
         boolean emailExists = memberRepository.existsByMemberEmail(member.getMemberEmail());
 
-        if(!emailExists) {
+        if(emailExists) {
             throw new MemberEmailDuplicateError();
         }
 

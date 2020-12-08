@@ -1,7 +1,6 @@
 package org.ingue.jpa.domain
 
 import io.github.benas.randombeans.EnhancedRandomBuilder
-import io.github.benas.randombeans.api.EnhancedRandom
 import org.ingue.jpa.domain.member.Member
 import org.ingue.jpa.domain.member.MemberModifier
 import org.ingue.jpa.domain.member.MemberRepository
@@ -11,10 +10,10 @@ import spock.lang.Specification
 
 class MemberModifierTests extends Specification {
 
-    def memberModifier
-    MemberRepository memberRepository
     @Shared
-    EnhancedRandom memberRandomBuilder
+    def memberRandomBuilder
+    def memberModifier
+    def memberRepository
 
     def setupSpec() {
         memberRandomBuilder = EnhancedRandomBuilder.aNewEnhancedRandomBuilder()
@@ -48,7 +47,7 @@ class MemberModifierTests extends Specification {
                 .nextObject(Member.class, "memberId")
 
         memberRepository = Stub(MemberRepository.class)
-        memberRepository.existsByMemberEmail(emailDuplicatedMember.getMemberEmail()) >> false
+        memberRepository.existsByMemberEmail(emailDuplicatedMember.getMemberEmail()) >> true
 
         memberModifier = new MemberModifier(memberRepository)
 
