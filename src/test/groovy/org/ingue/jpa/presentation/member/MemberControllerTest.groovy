@@ -40,7 +40,8 @@ class MemberControllerTest extends Specification {
 
     def "모든 필요조건을 만족하는 회원가입 요청이 들어왔을 때 성공적으로 회원가입 완료"() {
         given:
-        def correctSignUpRequest = enhancedRandom.nextObject(MemberSignUpRequest.class, "memberEmail", "memberPhoneNum")
+        def correctSignUpRequest = enhancedRandom
+                .nextObject(MemberSignUpRequest.class, "memberEmail", "memberPhoneNum")
         correctSignUpRequest.memberEmail = "signup@email.com"
         correctSignUpRequest.memberPhoneNumber = "01000000000"
 
@@ -55,19 +56,21 @@ class MemberControllerTest extends Specification {
                 .andExpect(jsonPath("\$.memberEmail").value(correctSignUpRequest.memberEmail))
                 .andExpect(jsonPath("\$.memberStateMessage").value(null))
                 .andExpect(jsonPath("\$.memberProfileUrl").value(null))
-                .andExpect(jsonPath("\$.memberBirthDate").value(correctSignUpRequest.memberBirthDate.toString()))
-                .andExpect(jsonPath("\$.memberPhoneNumber").value(correctSignUpRequest.memberPhoneNumber))
+                .andExpect(jsonPath("\$.memberBirthDate")
+                        .value(correctSignUpRequest.memberBirthDate.toString()))
+                .andExpect(jsonPath("\$.memberPhoneNumber")
+                        .value(correctSignUpRequest.memberPhoneNumber))
                 .andExpect(jsonPath("\$.memberKakaoId").value(correctSignUpRequest.memberKakaoId))
     }
 
-    def "모든 값에 null을 넣고 회원가입 요청이 들어오면 400 반환"() {
+    def "빈 상태로 회원가입 요청이 들어오면 400 반환"() {
         given:
-        def nullValuesSignUpRequest = new MemberSignUpRequest()
+        def emptySignUpRequest = new MemberSignUpRequest()
 
         expect:
         mockMvc.perform(post("/api/members")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsBytes(nullValuesSignUpRequest)))
+                .content(objectMapper.writeValueAsBytes(emptySignUpRequest)))
                 .andDo(print())
                 .andExpect(status().isBadRequest())
     }
@@ -86,6 +89,26 @@ class MemberControllerTest extends Specification {
                 .andDo(print())
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("\$[0].field").value("memberEmail"))
-                .andExpect(jsonPath("\$[0].defaultMessage").value("must be a well-formed email address"))
+                .andExpect(jsonPath("\$[0].defaultMessage")
+                        .value("must be a well-formed email address"))
+    }
+
+    def "핸드폰 형식을 지키지 않고 회원가입 요청이 들어오면 400 반환"() {
+        given:
+        def wrongPhoneNumberSignUpRequest = enhancedRandom
+                .nextObject(MemberSignUpRequest.class, "memberEmail", "memberPhoneNumber")
+        wrongPhoneNumberSignUpRequest.memberPhoneNumber = "wrongPhoneNumber"
+        wrongPhoneNumberSignUpRequest.memberEmail = "correct@email.com"
+
+        expect:
+        mockMvc.perform(post("/api/members")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsBytes(wrongPhoneNumberSignUpRequest)))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("\$[0].field").value("memberPhoneNumber"))
+                .andExpect(jsonPath("\$[0].defaultMessage")
+                        .value("must be enter only 10 or 11 digits number."))
+
     }
 }
