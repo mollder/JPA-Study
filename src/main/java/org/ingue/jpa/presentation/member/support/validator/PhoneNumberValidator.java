@@ -14,10 +14,6 @@ public class PhoneNumberValidator implements ConstraintValidator<PhoneNum, Strin
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        if(value == null) {
-            return false;
-        }
-
         if(value.length() == 10 || value.length() == 11) {
             Matcher matcher = Pattern.compile("[0-9]+").matcher(value);
 

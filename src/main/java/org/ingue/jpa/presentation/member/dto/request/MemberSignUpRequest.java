@@ -1,4 +1,4 @@
-package org.ingue.jpa.presentation.member.dto;
+package org.ingue.jpa.presentation.member.dto.request;
 
 import lombok.*;
 import org.ingue.jpa.domain.member.Member;
@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor
 @ToString
-public class MemberSignUpDto {
+public class MemberSignUpRequest {
 
     @NotEmpty
     private String memberPassword;
@@ -21,13 +21,14 @@ public class MemberSignUpDto {
     private String memberName;
 
     @Email
-    //TODO : @NotNull 및 @NotEmpty를 더해줘야 함 ( 공부 )
+    @NotEmpty
     private String memberEmail;
 
     @NotNull
     private LocalDate memberBirthDate;
 
     @PhoneNum
+    @NotEmpty
     private String memberPhoneNumber;
 
     @NotEmpty

@@ -10,7 +10,6 @@ public class MemberModifier {
     private final MemberRepository memberRepository;
 
     public Member signUp(Member member) {
-        memberRepository.save(member);
-        return null;
+        return memberRepository.save(member);
     }
 }
