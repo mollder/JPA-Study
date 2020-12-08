@@ -16,7 +16,7 @@ import java.util.List;
 @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class Member extends CreatedAndModifiedEntity {
+public class Member extends CreatedAndModifiedEntity implements Cloneable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

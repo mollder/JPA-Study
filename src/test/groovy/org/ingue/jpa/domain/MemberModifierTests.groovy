@@ -5,13 +5,14 @@ import io.github.benas.randombeans.api.EnhancedRandom
 import org.ingue.jpa.domain.member.Member
 import org.ingue.jpa.domain.member.MemberModifier
 import org.ingue.jpa.domain.member.MemberRepository
+import org.ingue.jpa.domain.member.exception.MemberEmailDuplicateError
 import spock.lang.Shared
 import spock.lang.Specification
 
 class MemberModifierTests extends Specification {
 
     def memberModifier
-    def memberRepository
+    MemberRepository memberRepository
     @Shared
     EnhancedRandom memberRandomBuilder
 
@@ -22,23 +23,12 @@ class MemberModifierTests extends Specification {
                 .build();
     }
 
-    def "조건에 맞는 Member가 들어오면 성공적으로 회원가입이 되야 합니다."() {
+    def "이메일이 중복되지 않은 멤버가 들어오면 성공적으로 회원가입이 되야 합니다."() {
         given:
         def member = memberRandomBuilder.nextObject(Member.class, "memberId")
 
-        def savedMember = Member.builder()
-                .memberId(1)
-                .memberPassword(member.memberPassword)
-                .memberBirthDate(member.memberBirthDate)
-                .memberChatroomMappings(member.memberChatroomMappings)
-                .memberEmail(member.memberEmail)
-                .memberKakaoId(member.memberKakaoId)
-                .memberName(member.memberName)
-                .memberProfileUrl(member.memberProfileUrl)
-                .memberPhoneNumber(member.memberPhoneNumber)
-                .memberStateMessage(member.memberStateMessage)
-                .withdrawAt(member.withdrawAt)
-                .build()
+        def savedMember = member.clone()
+        savedMember.memberId = 1
 
         memberRepository = Stub(MemberRepository.class)
         memberRepository.save(member) >> savedMember
@@ -50,6 +40,23 @@ class MemberModifierTests extends Specification {
 
         then:
         result.memberId == 1
+    }
+
+    def "이메일이 중복된 멤버가 들어오면 MemberEmailDuplicateError가 발생해야 합니다."() {
+        given:
+        def emailDuplicatedMember = memberRandomBuilder
+                .nextObject(Member.class, "memberId")
+
+        memberRepository = Stub(MemberRepository.class)
+        memberRepository.existsByMemberEmail(emailDuplicatedMember.getMemberEmail()) >> false
+
+        memberModifier = new MemberModifier(memberRepository)
+
+        when:
+        memberModifier.signUp(emailDuplicatedMember)
+
+        then:
+        thrown(MemberEmailDuplicateError.class)
     }
 
 }
