@@ -1,5 +1,7 @@
 package org.ingue.jpa.presentation.member.support.validator;
 
+import com.google.common.base.Strings;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.regex.Matcher;
@@ -14,6 +16,10 @@ public class PhoneNumberValidator implements ConstraintValidator<PhoneNum, Strin
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
+        if(Strings.isNullOrEmpty(value)) {
+            return false;
+        }
+
         if(value.length() == 10 || value.length() == 11) {
             Matcher matcher = Pattern.compile("[0-9]+").matcher(value);
 

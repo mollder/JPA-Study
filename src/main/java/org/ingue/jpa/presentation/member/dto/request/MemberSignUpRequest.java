@@ -20,15 +20,14 @@ public class MemberSignUpRequest {
     @NotEmpty
     private String memberName;
 
-    @Email
     @NotEmpty
+    @Email
     private String memberEmail;
 
     @NotNull
     private LocalDate memberBirthDate;
 
     @PhoneNum
-    @NotEmpty
     private String memberPhoneNumber;
 
     @NotEmpty
