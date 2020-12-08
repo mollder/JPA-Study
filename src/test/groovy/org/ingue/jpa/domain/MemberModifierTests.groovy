@@ -12,14 +12,19 @@ class MemberModifierTests extends Specification {
 
     @Shared
     def memberRandomBuilder
-    def memberModifier
     def memberRepository
+    def memberModifier
 
     def setupSpec() {
         memberRandomBuilder = EnhancedRandomBuilder.aNewEnhancedRandomBuilder()
                 .stringLengthRange(3, 5)
                 .collectionSizeRange(0, 0)
                 .build();
+    }
+
+    def setup() {
+        memberRepository = Stub(MemberRepository.class)
+        memberModifier = new MemberModifier(memberRepository)
     }
 
     def "이메일이 중복되지 않은 멤버가 들어오면 성공적으로 회원가입이 되야 합니다."() {
@@ -29,10 +34,7 @@ class MemberModifierTests extends Specification {
         def savedMember = member.clone()
         savedMember.memberId = 1
 
-        memberRepository = Stub(MemberRepository.class)
         memberRepository.save(member) >> savedMember
-
-        memberModifier = new MemberModifier(memberRepository)
 
         when:
         def result = memberModifier.signUp(member)
@@ -46,10 +48,7 @@ class MemberModifierTests extends Specification {
         def emailDuplicatedMember = memberRandomBuilder
                 .nextObject(Member.class, "memberId")
 
-        memberRepository = Stub(MemberRepository.class)
         memberRepository.existsByMemberEmail(emailDuplicatedMember.getMemberEmail()) >> true
-
-        memberModifier = new MemberModifier(memberRepository)
 
         when:
         memberModifier.signUp(emailDuplicatedMember)
@@ -57,5 +56,4 @@ class MemberModifierTests extends Specification {
         then:
         thrown(MemberEmailDuplicateError.class)
     }
-
 }
