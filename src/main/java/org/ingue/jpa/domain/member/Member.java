@@ -30,12 +30,4 @@ public class Member extends CreatedAndModifiedEntity implements Cloneable {
     private String memberPhoneNumber;
     private String memberKakaoId;
     private LocalDateTime withdrawAt;
-
-    @OneToMany(
-            mappedBy = "member",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    @Builder.Default
-    private List<MemberChatroomMapping> memberChatroomMappings = new ArrayList<>();
 }

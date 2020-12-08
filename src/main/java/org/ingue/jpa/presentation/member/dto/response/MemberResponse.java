@@ -1,13 +1,12 @@
 package org.ingue.jpa.presentation.member.dto.response;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import lombok.*;
 import org.ingue.jpa.domain.member.Member;
 
 import java.time.LocalDate;
 
 @Builder
+@Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class MemberResponse {
 

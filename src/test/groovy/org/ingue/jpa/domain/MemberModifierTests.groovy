@@ -19,7 +19,7 @@ class MemberModifierTests extends Specification {
         memberRandomBuilder = EnhancedRandomBuilder.aNewEnhancedRandomBuilder()
                 .stringLengthRange(3, 5)
                 .collectionSizeRange(0, 0)
-                .build();
+                .build()
     }
 
     def setup() {
@@ -56,4 +56,6 @@ class MemberModifierTests extends Specification {
         then:
         thrown(MemberEmailDuplicateError.class)
     }
+
+    //TODO : 카카오 id duplicate 일 경우 들어가면 안됨
 }
