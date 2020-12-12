@@ -1,7 +1,7 @@
 package org.ingue.jpa.domain.member;
 
 import lombok.RequiredArgsConstructor;
-import org.ingue.jpa.domain.member.exception.MemberEmailDuplicateError;
+import org.ingue.jpa.domain.member.exception.MemberEmailDuplicateException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,8 +13,8 @@ public class MemberModifier {
     public Member signUp(Member member) {
         boolean emailExists = memberRepository.existsByMemberEmail(member.getMemberEmail());
 
-        if(emailExists) {
-            throw new MemberEmailDuplicateError();
+        if (emailExists) {
+            throw new MemberEmailDuplicateException(member);
         }
 
         return memberRepository.save(member);

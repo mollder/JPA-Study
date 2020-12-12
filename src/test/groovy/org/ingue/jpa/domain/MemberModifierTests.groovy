@@ -4,7 +4,7 @@ import io.github.benas.randombeans.EnhancedRandomBuilder
 import org.ingue.jpa.domain.member.Member
 import org.ingue.jpa.domain.member.MemberModifier
 import org.ingue.jpa.domain.member.MemberRepository
-import org.ingue.jpa.domain.member.exception.MemberEmailDuplicateError
+import org.ingue.jpa.domain.member.exception.MemberEmailDuplicateException
 import spock.lang.Shared
 import spock.lang.Specification
 
@@ -54,7 +54,7 @@ class MemberModifierTests extends Specification {
         memberModifier.signUp(emailDuplicatedMember)
 
         then:
-        thrown(MemberEmailDuplicateError.class)
+        thrown(MemberEmailDuplicateException.class)
     }
 
     //TODO : 카카오 id duplicate 일 경우 들어가면 안됨

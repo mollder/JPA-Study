@@ -26,5 +26,6 @@ public class Chatroom extends CreatedAndModifiedEntity {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
+    @Builder.Default
     private List<MemberChatroomMapping> memberChatroomMappings = new ArrayList<>();
 }

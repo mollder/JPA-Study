@@ -30,4 +30,6 @@ public class Member extends CreatedAndModifiedEntity implements Cloneable {
     private String memberPhoneNumber;
     private String memberKakaoId;
     private LocalDateTime withdrawAt;
+
+
 }
