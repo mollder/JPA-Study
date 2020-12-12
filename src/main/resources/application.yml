@@ -10,7 +10,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/study?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
-    password: eldrb0116
+    password: eldrb0116/*
   flyway:
     enabled: false
   jpa:

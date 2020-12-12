@@ -1,6 +1,5 @@
 package org.ingue.jpa.presentation.member;
 
-import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.ingue.jpa.domain.member.Member;
 import org.ingue.jpa.domain.member.MemberFinder;

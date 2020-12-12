@@ -10,15 +10,15 @@ import spock.lang.Specification
 
 class MemberModifierTests extends Specification {
 
-    @Shared
-    def memberRandomBuilder
     def memberRepository
     def memberModifier
 
+    @Shared
+    def memberRandom
+
     def setupSpec() {
-        memberRandomBuilder = EnhancedRandomBuilder.aNewEnhancedRandomBuilder()
+        memberRandom = EnhancedRandomBuilder.aNewEnhancedRandomBuilder()
                 .stringLengthRange(3, 5)
-                .collectionSizeRange(0, 0)
                 .build()
     }
 
@@ -29,7 +29,7 @@ class MemberModifierTests extends Specification {
 
     def "이메일이 중복되지 않은 멤버가 들어오면 성공적으로 회원가입이 되야 합니다."() {
         given:
-        def member = memberRandomBuilder.nextObject(Member.class, "memberId")
+        def member = memberRandom.nextObject(Member.class, "memberId")
 
         def savedMember = member.clone()
         savedMember.memberId = 1
@@ -45,7 +45,7 @@ class MemberModifierTests extends Specification {
 
     def "이메일이 중복된 멤버가 들어오면 MemberEmailDuplicateError가 발생해야 합니다."() {
         given:
-        def emailDuplicatedMember = memberRandomBuilder
+        def emailDuplicatedMember = memberRandom
                 .nextObject(Member.class, "memberId")
 
         memberRepository.existsByMemberEmail(emailDuplicatedMember.getMemberEmail()) >> true

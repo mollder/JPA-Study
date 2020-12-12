@@ -4,7 +4,7 @@ flyway {
     url = 'jdbc:mysql://localhost:3306/study?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC'
     driver = "com.mysql.cj.jdbc.Driver"
     user = 'root'
-    password = 'eldrb0116'
+    password = 'eldrb0116/*'
     table = 'flyway_migration_history'
     encoding = 'UTF8'
 }
