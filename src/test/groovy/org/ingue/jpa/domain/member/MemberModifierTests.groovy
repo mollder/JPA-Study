@@ -1,4 +1,4 @@
-package org.ingue.jpa.domain
+package org.ingue.jpa.domain.member
 
 import io.github.benas.randombeans.EnhancedRandomBuilder
 import org.ingue.jpa.domain.member.Member
@@ -24,14 +24,14 @@ class MemberModifierTests extends Specification {
 
     def setup() {
         memberRepository = Stub(MemberRepository.class)
-        memberModifier = new MemberModifier(memberRepository)
+        memberModifier = new MemberModifier(memberRepository, new MemberValidator())
     }
 
     def "이메일이 중복되지 않은 멤버가 들어오면 성공적으로 회원가입이 되야 합니다."() {
         given:
         def member = memberRandom.nextObject(Member.class, "memberId")
 
-        def savedMember = member.clone()
+        def savedMember = member.cloneInstance(member)
         savedMember.memberId = 1
 
         memberRepository.save(member) >> savedMember
@@ -41,20 +41,6 @@ class MemberModifierTests extends Specification {
 
         then:
         result.memberId == 1
-    }
-
-    def "이메일이 중복된 멤버가 들어오면 MemberEmailDuplicateError가 발생해야 합니다."() {
-        given:
-        def emailDuplicatedMember = memberRandom
-                .nextObject(Member.class, "memberId")
-
-        memberRepository.existsByMemberEmail(emailDuplicatedMember.getMemberEmail()) >> true
-
-        when:
-        memberModifier.signUp(emailDuplicatedMember)
-
-        then:
-        thrown(MemberEmailDuplicateException.class)
     }
 
     //TODO : 카카오 id duplicate 일 경우 들어가면 안됨

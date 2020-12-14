@@ -22,7 +22,7 @@ public class MemberController {
 
     @GetMapping("/{memberId}")
     public MemberResponse getMember(@PathVariable Long memberId) {
-        Member findMember = memberFinder.getMember(memberId);
+        Member findMember = memberFinder.getMemberByMemberId(memberId);
 
         return MemberResponse.toMemberResponse(findMember);
     }
